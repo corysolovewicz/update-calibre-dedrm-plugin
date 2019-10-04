@@ -24,3 +24,5 @@ This script is based on the [this guide](https://www.reddit.com/r/Piracy/comment
 [Apprentice Alf's Blog](https://apprenticealf.wordpress.com/)
 
 [DeDRM Tools Github Repo](https://github.com/apprenticeharper/DeDRM_tools)
+
+You can also keep Calibre updated by using [this tool](https://github.com/fny/calibre-Installer)
