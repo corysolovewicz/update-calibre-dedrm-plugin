@@ -4,6 +4,16 @@
 # https://github.com/apprenticeharper/DeDRM_tools/releases/latest
 VERSION="6.6.3"
 
+# Check if Operating System is MacOS
+[ `uname` != 'Darwin' ] && error_exit "This installation script is incompatible with `uname` operating systems."
+
+# Check if calibre is open and if so, tell it to quit
+if [ `osascript -e 'tell application "System Events" to (name of processes) contains "calibre"'` = true ]; then
+  echo "Quitting calibre..."
+  osascript -e 'tell app "calibre" to quit' || error_exit 'Calibre failed to quit!'
+fi
+
+# Check if there's an argument
 if [ "$1" != "" ]; then
     VERSION=$1
     printf "\n############################# User passed version is ${VERSION} #############################"
@@ -60,17 +70,28 @@ calibre-customize --add-plugin=DeDRM_plugin_$VERSION.zip
 # this will verify that the plugin is installed
 #calibre-customize --list-plugins | grep DeDRM
 
-# cleaning up files
-printf "\n############################# Cleaning up files #############################"
-printf "\n"
-cd ../../..
-#pwd
-rm -rf DeDRM_tools_${VERSION}*
+# ask about cleaning up files
 
-printf "\nIf calibre was open while running this script, you will have to restart calibre to see the changes"
+while true; do
+    read -p "Do you wish to remove the working files (Y/N) ? " yn
+    case $yn in
+        [Yy]* ) printf "\n############################# Cleaning up files #############################";
+			cd ../../..;rm -rf DeDRM_tools_${VERSION}*; break;;
+        [Nn]* ) cd ../../..;break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+
+
+# launch calibre
+echo "Install complete! Launching calibre!"
+osascript -e 'tell application "calibre" to activate' || error_exit "Calibre failed to open!"
+
 printf "\n"
 printf "\nYou can verify that the DeDRM plugin was installed in calibre"
 printf "\nCalibre -> Preferences... -> Plugins -> File type plugins"
 printf "\nWhere you should see DeDRM($VERSION)"
 printf "\n"
 printf "\n"
+
