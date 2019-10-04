@@ -75,8 +75,7 @@ calibre-customize --add-plugin=DeDRM_plugin_$VERSION.zip
 while true; do
     read -p "Do you wish to remove the working files (Y/N) ? " yn
     case $yn in
-        [Yy]* ) printf "\n############################# Cleaning up files #############################";
-			cd ../../..;rm -rf DeDRM_tools_${VERSION}*; break;;
+        [Yy]* ) printf "\n############################# Cleaning up files #############################";cd ../../..;rm -rf DeDRM_tools_${VERSION}*; break;;
         [Nn]* ) cd ../../..;break;;
         * ) echo "Please answer yes or no.";;
     esac
@@ -85,6 +84,7 @@ done
 
 
 # launch calibre
+printf "\n"
 echo "Install complete! Launching calibre!"
 osascript -e 'tell application "calibre" to activate' || error_exit "Calibre failed to open!"
 
