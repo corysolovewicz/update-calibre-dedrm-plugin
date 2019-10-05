@@ -1,5 +1,5 @@
 # update-calibre-dedrm-plugin
-A shell script to update the calibre DeDRM plugin for MacOS but not before modifying Alf's DeDRM plugin to enable ripping of DRM from Library/Rented Books.  It was tedious to do this everytime there was a new update to the plugin, so I wrote this short shell script to automate the process instead. 
+A shell script to download, edit the calibre DeDRM plugin for MacOS to allow ripping of DRM from Library/Rented Books, and then import the newly edited plugin into calibre.  It was tedious to do this everytime there was a new update to the plugin, so I wrote this short shell script to automate the process instead. 
 
 # Dependencies
 * [Calibre for MacOS](https://calibre-ebook.com/download_osx)
