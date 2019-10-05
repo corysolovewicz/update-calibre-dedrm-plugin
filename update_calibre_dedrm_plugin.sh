@@ -2,7 +2,12 @@
 
 # come up with way to grab the latest version number from
 # https://github.com/apprenticeharper/DeDRM_tools/releases/latest
-VERSION="6.6.3"
+#VERSION="6.6.3"
+printf "\n############################# Getting the Latest Version Tag from GitHub #############################"
+printf "\n"
+VERSION=`curl https://github.com/apprenticeharper/DeDRM_tools/releases/latest | sed 's|.*tag/v\(.*\)">redirect.*|\1|'`
+printf "\n############################# The Latest Version Tag is $VERSION #############################"
+printf "\n"
 
 # Check if Operating System is MacOS
 [ `uname` != 'Darwin' ] && error_exit "This installation script is incompatible with `uname` operating systems."
@@ -19,7 +24,7 @@ if [ "$1" != "" ]; then
     printf "\n############################# User passed version is ${VERSION} #############################"
     printf "\n"
 else
-    printf "\n############################# Using default version ${VERSION} #############################"
+    printf "\n############################# Using latest version ${VERSION} #############################"
     printf "\n"
 fi
 
@@ -151,4 +156,3 @@ printf "\nCalibre -> Preferences... -> Plugins -> File type plugins"
 printf "\nWhere you should see DeDRM($VERSION)"
 printf "\n"
 printf "\n"
-
