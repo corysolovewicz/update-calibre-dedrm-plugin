@@ -142,12 +142,13 @@ done
 
 # launch calibre
 printf "\n"
-echo "Install complete! Launching calibre!"
+printf "\n"
+echo "############################# Install complete! Launching calibre! #############################"
 osascript -e 'tell application "calibre" to activate' || error_exit "Calibre failed to open!"
 
-printf "\n"
-printf "\nYou can verify that the DeDRM plugin was installed in calibre"
+printf "You can verify that the DeDRM plugin was installed in calibre"
 printf "\nCalibre -> Preferences... -> Plugins -> File type plugins"
 printf "\nWhere you should see DeDRM($VERSION)"
 printf "\n"
 printf "\n"
+
