@@ -28,7 +28,6 @@ else
     printf "\n"
 fi
 
-
 # Download Alf's DeDRM tools
 printf "\n############################# Downloading AlfDeDRM Tools......... #############################"
 printf "\n"
@@ -69,7 +68,6 @@ else
 	exit;
 fi
 
-
 # enter into calibre plugin directory
 cd DeDRM_tools_$VERSION/DeDRM_calibre_plugin/
 
@@ -90,7 +88,6 @@ else
 	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no DeDRM_plugin.zip. Exiting...."
 	exit;
 fi
-
 
 # enter unzip calibre plugin
 cd DeDRM_plugin
@@ -142,8 +139,6 @@ while true; do
         * ) echo "Please answer yes or no.";;
     esac
 done
-
-
 
 # launch calibre
 printf "\n"
