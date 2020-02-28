@@ -69,28 +69,35 @@ else
 fi
 
 # enter into calibre plugin directory
-cd DeDRM_tools_$VERSION/DeDRM_calibre_plugin/
+#cd DeDRM_tools_$VERSION/DeDRM_calibre_plugin/
 
-# unzip DeDRM_plugin.zip archive
-printf "\n############################# Unzipping Alf's DeDRM Calibre Plugin #############################"
-printf "\n"
-# Check if archive exists before attempting to unzip
-if [ -e DeDRM_plugin.zip ]
+# # unzip DeDRM_plugin.zip archive
+# printf "\n############################# Unzipping Alf's DeDRM Calibre Plugin #############################"
+# printf "\n"
+# # Check if archive exists before attempting to unzip
+# if [ -e DeDRM_Plugin.zip ]
+# then
+# 	echo "DeDRM_plugin.zip exists prepare to unzip"
+# 	if [ ! -e DeDRM_Plugin ]
+# 	then
+# 		unzip DeDRM_Plugin.zip -d DeDRM_Plugin 
+# 	else
+# 		echo "The directory DeDRM_Plugin already exists, no need to unzip archive"
+# 	fi
+# else
+# 	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no DeDRM_Plugin.zip. Exiting...."
+# 	exit;
+# fi
+
+cd DeDRM_tools_$VERSION
+
+if [ -e DeDRM_Plugin ]
 then
-	echo "DeDRM_plugin.zip exists prepare to unzip"
-	if [ ! -e DeDRM_plugin ]
-	then
-		unzip DeDRM_plugin.zip -d DeDRM_plugin 
-	else
-		echo "The directory DeDRM_plugin already exists, no need to unzip archive"
-	fi
+	cd DeDRM_Plugin
 else
-	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no DeDRM_plugin.zip. Exiting...."
-	exit;
+	echo "The directory DeDRM_Plugin doesn't exist!"
 fi
 
-# enter unzip calibre plugin
-cd DeDRM_plugin
 
 # edit mobiderm.py to remove the library/rented book restriction
 printf "\n############################# Editing the mobiderm.py file to remove the library/rented ebooks restriction #############################"
