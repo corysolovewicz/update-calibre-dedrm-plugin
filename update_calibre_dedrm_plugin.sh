@@ -35,6 +35,7 @@ URL=https://github.com/apprenticeharper/DeDRM_tools/releases/download/v$VERSION/
 # echo $URL
 # wget_output will be 0 if $URL is found, otherwise it is not found so we should exit
 
+# Check if the DeDRM_tools_$VERSION.zip doesn't already exist on the file system
 if [ ! -e DeDRM_tools_$VERSION.zip ]
 then
 	wget_output=$(wget -q "$URL")
@@ -69,35 +70,29 @@ else
 fi
 
 # enter into calibre plugin directory
-#cd DeDRM_tools_$VERSION/DeDRM_calibre_plugin/
+#cd DeDRM_tools_$VERSION/DeDRM_calibre_Plugin/
+cd DeDRM_tools_$VERSION/
 
-# # unzip DeDRM_plugin.zip archive
-# printf "\n############################# Unzipping Alf's DeDRM Calibre Plugin #############################"
-# printf "\n"
-# # Check if archive exists before attempting to unzip
-# if [ -e DeDRM_Plugin.zip ]
-# then
-# 	echo "DeDRM_plugin.zip exists prepare to unzip"
-# 	if [ ! -e DeDRM_Plugin ]
-# 	then
-# 		unzip DeDRM_Plugin.zip -d DeDRM_Plugin 
-# 	else
-# 		echo "The directory DeDRM_Plugin already exists, no need to unzip archive"
-# 	fi
-# else
-# 	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no DeDRM_Plugin.zip. Exiting...."
-# 	exit;
-# fi
-
-cd DeDRM_tools_$VERSION
-
-if [ -e DeDRM_Plugin ]
+# unzip DeDRM_Plugin.zip archive
+printf "\n############################# Unzipping Alf's DeDRM Calibre Plugin #############################"
+printf "\n"
+# Check if archive exists before attempting to unzip
+if [ -e DeDRM_Plugin.zip ]
 then
-	cd DeDRM_Plugin
+	echo "DeDRM_Plugin.zip exists prepare to unzip"
+	if [ ! -e DeDRM_Plugin ]
+	then
+		unzip DeDRM_Plugin.zip -d DeDRM_Plugin 
+	else
+		echo "The directory DeDRM_Plugin already exists, no need to unzip archive"
+	fi
 else
-	echo "The directory DeDRM_Plugin doesn't exist!"
+	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no DeDRM_Plugin.zip. Exiting...."
+	exit;
 fi
 
+# enter unzip calibre plugin
+cd DeDRM_Plugin
 
 # edit mobiderm.py to remove the library/rented book restriction
 printf "\n############################# Editing the mobiderm.py file to remove the library/rented ebooks restriction #############################"
@@ -115,10 +110,10 @@ fi
 # zip newly modified calbre plugin
 printf "\n############################# Zipping newly modified calbre plugin #############################"
 printf "\n"
-zip -r DeDRM_plugin_$VERSION.zip *
-if [ ! -e DeDRM_plugin_$VERSION.zip ]
+zip -r DeDRM_Plugin_$VERSION.zip *
+if [ ! -e DeDRM_Plugin_$VERSION.zip ]
 then
-	echo "ERROR: DeDRM_plugin_$VERSION.zip doesn't exist. Something went wrong when creating it. Exiting...."
+	echo "ERROR: DeDRM_Plugin_$VERSION.zip doesn't exist. Something went wrong when creating it. Exiting...."
 	exit;
 fi
 
@@ -131,7 +126,7 @@ export PATH=/Applications/calibre.app/Contents/MacOS/:$PATH
 # load the plugin into calibre
 printf "\n############################# Loading the newly modified plugin into calibre #############################"
 printf "\n"
-calibre-customize --add-plugin=DeDRM_plugin_$VERSION.zip
+calibre-customize --add-plugin=DeDRM_Plugin_$VERSION.zip
 #printf "\n"
 # this will verify that the plugin is installed
 #calibre-customize --list-plugins | grep DeDRM
