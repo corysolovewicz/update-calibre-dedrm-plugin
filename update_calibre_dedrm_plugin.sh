@@ -101,9 +101,19 @@ if [ -e mobidedrm.py ]
 then
 	echo "mobidedrm.py exists preparing to edit"
 	sed -i -e 's/if val406 != 0:/#if val406 != 0:/g' mobidedrm.py
-	sed -i -e 's/raise DrmException(u"Cannot decode library or rented ebooks.")/#raise DrmException(u"Cannot decode library or rented ebooks.")/g' mobidedrm.py
+	sed -i -e 's/raise DrmException("Cannot decode library or rented ebooks.")/#raise DrmException("Cannot decode library or rented ebooks.")/g' mobidedrm.py
 else
 	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no mobidedrm.py. Exiting...."
+	exit;
+fi 
+
+if [ -e mobidedrm.py-e ]
+then
+	echo "mobidedrm.py exists preparing to edit"
+	sed -i -e 's/if val406 != 0:/#if val406 != 0:/g' mobidedrm.py-e
+	sed -i -e 's/raise DrmException("Cannot decode library or rented ebooks.")/#raise DrmException("Cannot decode library or rented ebooks.")/g' mobidedrm.py-e
+else
+	echo "ERROR: Something is wrong with DeDRM_tools_$VERSION. There is no mobidedrm.py-e. Exiting...."
 	exit;
 fi 
 
